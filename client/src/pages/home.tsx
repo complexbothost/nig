@@ -38,7 +38,7 @@ export default function Home() {
           </Avatar>
         </div>
 
-        <h1 className="text-5xl font-bold text-white animate-glow" style={{ textShadow: '0 0 15px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.6)' }}>
+        <h1 className="text-5xl font-bold text-black animate-glow" style={{ textShadow: '0 0 15px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.6)' }}>
           krane
         </h1>
 
