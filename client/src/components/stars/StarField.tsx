@@ -30,7 +30,7 @@ export function StarField() {
 
     const createStar = (): Star => ({
       x: Math.random() * canvas.width,
-      y: 0,
+      y: 0, // Always start from top
       size: Math.random() * 2 + 1,
       speed: Math.random() * 2 + 1,
       color: `hsl(${Math.random() * 60 + 260}, 80%, 70%)`,
@@ -39,7 +39,11 @@ export function StarField() {
     });
 
     const initStars = () => {
-      starsRef.current = Array.from({ length: 100 }, createStar);
+      // Distribute stars vertically at start
+      starsRef.current = Array.from({ length: 100 }, (_, i) => ({
+        ...createStar(),
+        y: -(Math.random() * canvas.height), // Start above screen, distributed vertically
+      }));
     };
 
     const updateStar = (star: Star) => {
