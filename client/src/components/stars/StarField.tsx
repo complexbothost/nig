@@ -6,6 +6,7 @@ interface Star {
   size: number;
   speed: number;
   color: string;
+  originalColor: string; // Added to store initial color
   alpha: number;
   fadeStart: number;
 }
@@ -28,15 +29,19 @@ export function StarField() {
       canvas.height = window.innerHeight;
     };
 
-    const createStar = (): Star => ({
-      x: Math.random() * canvas.width,
-      y: 0, // Always start from top
-      size: Math.random() * 2 + 1,
-      speed: Math.random() * 2 + 1,
-      color: `hsl(${Math.random() * 60 + 260}, 80%, 70%)`,
-      alpha: 1,
-      fadeStart: 0,
-    });
+    const createStar = (): Star => {
+      const originalColor = `hsl(${Math.random() * 60 + 260}, 80%, 70%)`; // Purple-ish color
+      return {
+        x: Math.random() * canvas.width,
+        y: 0, // Always start from top
+        size: Math.random() * 2 + 1,
+        speed: Math.random() * 2 + 1,
+        color: originalColor,
+        originalColor,
+        alpha: 1,
+        fadeStart: 0,
+      };
+    };
 
     const initStars = () => {
       // Distribute stars vertically at start
@@ -57,6 +62,9 @@ export function StarField() {
       if (distance < 50) { // Changed from 100 to 50 for smaller radius
         // Change color based on proximity
         star.color = `hsl(${Math.random() * 360}, 80%, 70%)`;
+      } else {
+        // Revert to original color when outside radius
+        star.color = star.originalColor;
       }
 
       // Start fading when star reaches 90% of screen height

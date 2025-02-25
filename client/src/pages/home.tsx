@@ -30,7 +30,9 @@ export default function Home() {
 
       <div className="z-10 text-center space-y-6">
         <div className="w-32 h-32 mx-auto">
-          <Avatar className="w-full h-full border-4 border-purple-500 shadow-lg shadow-purple-500/50">
+          <Avatar className="w-full h-full border-4 border-purple-500/30 shadow-lg shadow-purple-500/50" style={{
+            boxShadow: '0 0 20px rgba(168, 85, 247, 0.5), 0 0 40px rgba(168, 85, 247, 0.3)'
+          }}>
             <AvatarImage src="https://i.imgur.com/QkIa5tT.jpeg" alt="Profile" />
             <AvatarFallback>K</AvatarFallback>
           </Avatar>
