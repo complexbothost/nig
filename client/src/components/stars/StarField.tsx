@@ -6,9 +6,10 @@ interface Star {
   size: number;
   speed: number;
   color: string;
-  originalColor: string; // Added to store initial color
+  originalColor: string;
   alpha: number;
   fadeStart: number;
+  hue: number; // Added to track current hue for smoother transitions
 }
 
 export function StarField() {
@@ -40,6 +41,7 @@ export function StarField() {
         originalColor,
         alpha: 1,
         fadeStart: 0,
+        hue: 260 + Math.random() * 60, // Initialize with purple hue
       };
     };
 
@@ -60,10 +62,14 @@ export function StarField() {
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       if (distance < 50) { // Changed from 100 to 50 for smaller radius
-        // Change color based on proximity
-        star.color = `hsl(${Math.random() * 360}, 80%, 70%)`;
+        // Gradually shift the hue
+        const targetHue = (star.hue + 2) % 360; // Slower color change
+        star.hue = targetHue;
+        star.color = `hsl(${star.hue}, 80%, 70%)`;
       } else {
-        // Revert to original color when outside radius
+        // Gradually return to original color when outside radius
+        const purpleHue = 260 + Math.random() * 60;
+        star.hue = purpleHue;
         star.color = star.originalColor;
       }
 
