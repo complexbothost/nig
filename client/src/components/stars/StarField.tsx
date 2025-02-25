@@ -44,13 +44,13 @@ export function StarField() {
 
     const updateStar = (star: Star) => {
       star.y += star.speed;
-      
-      // Check if star is near cursor (within 100px radius)
+
+      // Check if star is near cursor (within 50px radius)
       const dx = star.x - mouseRef.current.x;
       const dy = star.y - mouseRef.current.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      
-      if (distance < 100) {
+
+      if (distance < 50) { // Changed from 100 to 50 for smaller radius
         // Change color based on proximity
         star.color = `hsl(${Math.random() * 360}, 80%, 70%)`;
       }
@@ -83,14 +83,14 @@ export function StarField() {
         ctx.beginPath();
         ctx.fillStyle = star.color;
         ctx.globalAlpha = star.alpha;
-        
+
         // Draw star with glow effect
         ctx.shadowBlur = 15;
         ctx.shadowColor = star.color;
-        
+
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fill();
-        
+
         // Reset shadow for next star
         ctx.shadowBlur = 0;
         updateStar(star);
@@ -108,7 +108,7 @@ export function StarField() {
 
     window.addEventListener("resize", resizeCanvas);
     window.addEventListener("mousemove", handleMouseMove);
-    
+
     resizeCanvas();
     initStars();
     draw();
