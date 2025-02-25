@@ -56,12 +56,12 @@ export function StarField() {
     const updateStar = (star: Star) => {
       star.y += star.speed;
 
-      // Check if star is near cursor (within 50px radius)
+      // Check if star is near cursor (within 75px radius)
       const dx = star.x - mouseRef.current.x;
       const dy = star.y - mouseRef.current.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      if (distance < 50) { // Changed from 100 to 50 for smaller radius
+      if (distance < 75) { // Changed from 50 to 75 for larger radius
         // Gradually shift the hue
         const targetHue = (star.hue + 4) % 360; // Increased from 2 to 4 for faster color change
         star.hue = targetHue;
