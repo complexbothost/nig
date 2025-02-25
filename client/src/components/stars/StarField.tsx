@@ -63,7 +63,7 @@ export function StarField() {
 
       if (distance < 50) { // Changed from 100 to 50 for smaller radius
         // Gradually shift the hue
-        const targetHue = (star.hue + 2) % 360; // Slower color change
+        const targetHue = (star.hue + 4) % 360; // Increased from 2 to 4 for faster color change
         star.hue = targetHue;
         star.color = `hsl(${star.hue}, 80%, 70%)`;
       } else {
